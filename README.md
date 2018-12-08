@@ -1,7 +1,7 @@
 module_bettercap
 ===============
 
-FruityWiFi BetterCap module.
+BlackBlulb BetterCap module.
 
 
 v1.0
