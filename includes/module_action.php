@@ -43,7 +43,7 @@ if($service != "") {
     if ($action == "start") {
         // COPY LOG
         $exec = "$bin_mv $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         // OPTIONS
         $opt ="";
@@ -81,7 +81,7 @@ if($service != "") {
         //exit;
         
         //$exec = "$bin_bettercap --proxy -P POST --proxy-port 10000 -I $io_in_iface --no-spoofing --no-discovery --log-timestamp -O $mod_logs > /dev/null &";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         $wait = 2;
         
@@ -89,23 +89,23 @@ if($service != "") {
         
         for ($i=0; $i <= 4; $i++) {
             $exec = "$bin_iptables -t nat -D POSTROUTING -s 0/0 -j MASQUERADE";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         }
         
         if ($mod_bc_dns_enabled == "0") {
             sleep(2);
         
             $exec = "$bin_iptables -t nat -D PREROUTING -i $io_in_iface -p tcp --dport 53 -j DNAT --to $io_in_ip:5300";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             
             $exec = "$bin_iptables -t nat -D PREROUTING -i $io_in_iface -p udp --dport 53 -j DNAT --to $io_in_ip:5300";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             /*	
             $exec = "$bin_iptables -t nat -D PREROUTING -i $io_in_iface -p tcp --dport 80 -j DNAT --to $io_in_ip:10000";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
         
             $exec = "$bin_iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000";
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
             */
         }
         
@@ -115,31 +115,31 @@ if($service != "") {
         exec($exec,$output);
         
         $exec = "kill " . $output[0];
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         // CLEAN IPTABLES RULES
         
         $exec = "$bin_iptables -t nat -D PREROUTING -i $io_in_iface -p tcp --dport 53 -j DNAT --to $io_in_ip:5300";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         $exec = "$bin_iptables -t nat -D PREROUTING -i $io_in_iface -p udp --dport 53 -j DNAT --to $io_in_ip:5300";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         $exec = "$bin_iptables -t nat -D PREROUTING -i $io_in_iface -p tcp --dport 80 -j DNAT --to $io_in_ip:10000";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         $exec = "$bin_iptables -t nat -D PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
     }
 }
 
 if ($install == "install_$mod_name") {
 
     $exec = "chmod 755 install.sh";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
     
     header('Location: ../../install.php?module='.$mod_name);
     exit;

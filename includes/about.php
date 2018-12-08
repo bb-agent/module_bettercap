@@ -12,6 +12,6 @@
 <br>
 <b>Bettercap Install (script)</b>:
 <font face="monospace">
-<br>cd /usr/share/fruitywifi/www/modules/bettercap/includes
+<br>cd /usr/share/blackbulb/www/modules/bettercap/includes
 <br>chmod 755 install.sh
 <br>./install.sh

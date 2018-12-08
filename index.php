@@ -104,7 +104,7 @@ $proxy = $_POST["proxy"];
 // DELETE LOG
 if ($logfile != "" and $action == "delete") {
     $exec = "$bin_rm ".$mod_logs_history.$logfile.".log";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 }
 
 ?>
@@ -167,13 +167,13 @@ if ($logfile != "" and $action == "delete") {
             
             if ($mod_sslstrip_filter == "LogEx.py") {
                 $exec = "$bin_python $mod_path/includes/filters/LogEx.py $filename";
-                $output = exec_fruitywifi($exec);
+                $output = exec_blackbulb($exec);
                 
                 //$data = implode("\n",$output);
                 $data = $output;
             } else if ($mod_sslstrip_filter == "ParseLog.py") {
                 $exec = "$bin_python $mod_path/includes/filters/ParseLog.py $filename $mod_path/includes/filters";
-                $output = exec_fruitywifi($exec);
+                $output = exec_blackbulb($exec);
                         
                 //$data = implode("\n",$output);
                 $data = $output;
